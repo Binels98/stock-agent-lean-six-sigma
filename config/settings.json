@@ -1,0 +1,76 @@
+{
+  "system": {
+    "name": "Stock Agent Lean Six Sigma",
+    "version": "2.0.0",
+    "timezone": "Europe/Rome",
+    "language": {
+      "primary": "it",
+      "secondary": "en"
+    },
+    "market_hours": {
+      "europe": {
+        "open": "09:00",
+        "close": "17:30"
+      },
+      "usa": {
+        "open": "15:30",
+        "close": "22:00"
+      }
+    },
+    "monitoring": {
+      "interval_minutes": 5,
+      "active_markets": ["europe", "usa"],
+      "start_time": "07:00",
+      "end_time": "22:00"
+    }
+  },
+  "agents": {
+    "enabled": [
+      "calendar",
+      "definer",
+      "scanner",
+      "data_collector",
+      "quality",
+      "analyzer",
+      "news",
+      "risk",
+      "improvement",
+      "optimization",
+      "monitor",
+      "reporter",
+      "performance",
+      "blackrock",
+      "ark",
+      "momentum",
+      "contrarian",
+      "value",
+      "growth",
+      "portfolio_manager",
+      "decision_engine",
+      "consensus_builder"
+    ],
+    "concurrency": {
+      "max_parallel": 5,
+      "timeout_minutes": 30
+    }
+  },
+  "notifications": {
+    "telegram": {
+      "enabled": true,
+      "report_morning": true,
+      "report_evening": true,
+      "alerts_critical": true,
+      "alerts_warning": true,
+      "updates": true
+    },
+    "email": {
+      "enabled": false
+    }
+  },
+  "reporting": {
+    "morning_report_time": "08:00",
+    "evening_report_time": "18:00",
+    "include_previous_day_summary": true,
+    "previous_day_data_path": "data/monitoring/previous_day.json"
+  }
+}
