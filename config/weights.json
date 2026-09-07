@@ -1,0 +1,47 @@
+{
+  "scoring_weights": {
+    "tecnologico": {
+      "fundamental": 40,
+      "technical": 30,
+      "qualitative": 20,
+      "macro": 10
+    },
+    "finanziario": {
+      "fundamental": 50,
+      "technical": 25,
+      "qualitative": 15,
+      "macro": 10
+    },
+    "utility": {
+      "fundamental": 55,
+      "technical": 20,
+      "qualitative": 15,
+      "macro": 10
+    },
+    "energetico": {
+      "fundamental": 45,
+      "technical": 25,
+      "qualitative": 20,
+      "macro": 10
+    },
+    "consumer": {
+      "fundamental": 40,
+      "technical": 30,
+      "qualitative": 20,
+      "macro": 10
+    }
+  },
+  "analyst_weights": {
+    "blackrock": 0.25,
+    "ark": 0.20,
+    "momentum": 0.15,
+    "contrarian": 0.10,
+    "value": 0.20,
+    "growth": 0.10
+  },
+  "decision_weights": {
+    "score": 0.50,
+    "risk": 0.30,
+    "consensus": 0.20
+  }
+}
