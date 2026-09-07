@@ -23,12 +23,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set REPORT_TYPE
+        run: |
+          if [ "${{ github.event.schedule }}" = "0 6 * * *" ]; then
+            echo "REPORT_TYPE=morning" >> $GITHUB_ENV
+          else
+            echo "REPORT_TYPE=evening" >> $GITHUB_ENV
+          fi
+
       - name: Run Reporter Agent (Morning or Evening)
         run: node agents/control/reporter.js
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          REPORT_TYPE: ${{ github.event.schedule == '0 6 * * *' && 'morning' || 'evening' }}
+          REPORT_TYPE: ${{ env.REPORT_TYPE }}
 
       - name: Run Performance Agent
         run: node agents/control/performance.js
