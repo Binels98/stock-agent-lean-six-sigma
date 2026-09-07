@@ -1,0 +1,54 @@
+name: Decide - Final Decision Making
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # 10:00 Rome time (UTC+2)
+  workflow_dispatch:
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Portfolio Manager
+        run: node agents/decide/portfolio-manager.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Run Decision Engine
+        run: node agents/decide/decision-engine.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Run Consensus Builder
+        run: node agents/decide/consensus-builder.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Send Decision Report to Telegram
+        run: node scripts/send-decision-report.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Commit decision reports
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add data/analysis/decide/
+          git add reports/decision/
+          git commit -m "Update decision reports - $(date +'%Y-%m-%d %H:%M')" || true
+          git push
