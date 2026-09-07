@@ -1,0 +1,43 @@
+{
+  "name": "stock-agent-lean-six-sigma",
+  "version": "2.0.0",
+  "description": "Sistema Multi-Agente per Analisi Azionaria 24/7 con Metodologia Lean Six Sigma",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node tests/index.js",
+    "scan": "node agents/measure/scanner.js",
+    "analyze": "node agents/analyze/analyzer.js",
+    "report": "node agents/control/reporter.js",
+    "monitor": "node agents/control/monitor.js",
+    "morning_report": "node scripts/send-morning-report.js",
+    "evening_report": "node scripts/send-evening-report.js",
+    "decision_report": "node scripts/send-decision-report.js"
+  },
+  "keywords": [
+    "stock",
+    "analysis",
+    "lean",
+    "six-sigma",
+    "dmaic",
+    "finance",
+    "investing",
+    "trading",
+    "telegram",
+    "github-actions"
+  ],
+  "author": "Federico Binello",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "luxon": "^3.4.4",
+    "node-cron": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
