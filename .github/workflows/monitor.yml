@@ -2,8 +2,8 @@ name: Monitor - Real-Time Market Monitoring
 
 on:
   schedule:
-    # Run every 5 minutes from 07:00 to 20:00 UTC (09:00-22:00 Rome time)
-    - cron: '*/5 7-20 * * *'
+    # Run every 5 minutes from 07:00 to 22:00 UTC (09:00-00:00 Rome time)
+    - cron: '*/5 7-22 * * *'
   workflow_dispatch:
 
 jobs:
