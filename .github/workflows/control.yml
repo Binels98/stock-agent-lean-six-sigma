@@ -1,0 +1,46 @@
+name: Control - Monitoring and Reporting
+
+on:
+  schedule:
+    # Morning report at 06:00 UTC = 08:00 Rome time
+    - cron: '0 6 * * *'
+    # Evening report at 16:00 UTC = 18:00 Rome time
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Reporter Agent (Morning or Evening)
+        run: node agents/control/reporter.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          REPORT_TYPE: ${{ github.event.schedule == '0 6 * * *' && 'morning' || 'evening' }}
+
+      - name: Run Performance Agent
+        run: node agents/control/performance.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Commit control data
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add reports/daily/
+          git add data/monitoring/
+          git commit -m "Update control reports - $(date +'%Y-%m-%d %H:%M')" || true
+          git push
