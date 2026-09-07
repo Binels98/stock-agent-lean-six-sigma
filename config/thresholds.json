@@ -1,0 +1,73 @@
+{
+  "critical_thresholds": {
+    "altman_z_score": {
+      "distress": 1.81,
+      "grey_zone": 2.99,
+      "safe": 3.0,
+      "notify_below": 2.0
+    },
+    "beneish_m_score": {
+      "manipulation": 2.22,
+      "grey_zone": 1.0,
+      "safe": 0.0,
+      "notify_above": 1.5
+    },
+    "debt_equity": {
+      "max_acceptable": 2.0,
+      "warning": 1.5,
+      "critical": 2.5,
+      "notify_above": 1.5
+    },
+    "current_ratio": {
+      "min_acceptable": 1.5,
+      "warning": 1.2,
+      "critical": 1.0,
+      "notify_below": 1.5
+    },
+    "quick_ratio": {
+      "min_acceptable": 1.0,
+      "warning": 0.8,
+      "critical": 0.5,
+      "notify_below": 1.0
+    },
+    "roe": {
+      "min_acceptable": 10.0,
+      "warning": 8.0,
+      "critical": 5.0,
+      "notify_below": 10.0
+    },
+    "roa": {
+      "min_acceptable": 5.0,
+      "warning": 3.0,
+      "critical": 1.0,
+      "notify_below": 5.0
+    }
+  },
+  "technical_thresholds": {
+    "rsi": {
+      "overbought": 70,
+      "oversold": 30,
+      "neutral_high": 60,
+      "neutral_low": 40
+    },
+    "macd": {
+      "bullish_signal": 0.0,
+      "bearish_signal": 0.0
+    },
+    "bollinger_bands": {
+      "upper_threshold": 2.0,
+      "lower_threshold": -2.0
+    },
+    "price_variation": {
+      "daily_positive": 5.0,
+      "daily_negative": -5.0,
+      "intraday_positive": 3.0,
+      "intraday_negative": -3.0
+    }
+  },
+  "monitoring_thresholds": {
+    "volume_spike": 2.5,
+    "price_volatility": 10.0,
+    "news_impact": 0.8
+  }
+}
