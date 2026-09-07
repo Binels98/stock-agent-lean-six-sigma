@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "last_updated": "2026-09-07T12:00:00Z",
+  "release_notes": "Complete implementation with all analyst agents (BlackRock, ARK, Momentum, Contrarian, Value, Growth), decision agents (PortfolioManager, DecisionEngine, ConsensusBuilder), control agents (Monitor, Reporter, Performance), and report scripts. Extended monitoring to 22:00 UTC for US market close, morning report at 08:00 Rome time with previous day summary.",
+  "git_commit": "",
+  "build_number": 2
+}
