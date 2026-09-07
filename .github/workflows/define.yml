@@ -1,0 +1,36 @@
+name: Define - Portfolio Definition
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # 07:00 Rome time (UTC+2)
+  workflow_dispatch:
+
+jobs:
+  define:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Definer Agent
+        run: node agents/define/definer.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TIMEZONE: ${{ secrets.TIMEZONE || 'Europe/Rome' }}
+
+      - name: Commit define data
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add data/define/
+          git commit -m "Update define data - $(date +'%Y-%m-%d %H:%M')" || true
+          git push
