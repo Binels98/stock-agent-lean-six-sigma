@@ -1,0 +1,102 @@
+{
+  "portfolio": {
+    "name": "Portafoglio Principale",
+    "base_currency": "EUR",
+    "rebalancing_frequency": "daily",
+    "target_allocation": {
+      "tecnologico": 40,
+      "finanziario": 25,
+      "utility": 15,
+      "energetico": 10,
+      "consumer": 10
+    },
+    "stocks": [
+      {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "exchange": "NASDAQ",
+        "sector": "tecnologico",
+        "weight": 10,
+        "currency": "USD",
+        "purchase_price": 150.00,
+        "purchase_date": "2026-09-07",
+        "target_price": 180.00,
+        "stop_loss": 135.00,
+        "active": true
+      },
+      {
+        "ticker": "MSFT",
+        "name": "Microsoft Corporation",
+        "exchange": "NASDAQ",
+        "sector": "tecnologico",
+        "weight": 10,
+        "currency": "USD",
+        "purchase_price": 300.00,
+        "purchase_date": "2026-09-07",
+        "target_price": 350.00,
+        "stop_loss": 270.00,
+        "active": true
+      },
+      {
+        "ticker": "ENEL.MI",
+        "name": "Enel S.p.A.",
+        "exchange": "Borsa Italiana",
+        "sector": "utility",
+        "weight": 8,
+        "currency": "EUR",
+        "purchase_price": 6.50,
+        "purchase_date": "2026-09-07",
+        "target_price": 8.00,
+        "stop_loss": 5.80,
+        "active": true
+      },
+      {
+        "ticker": "UCG.MI",
+        "name": "UniCredit S.p.A.",
+        "exchange": "Borsa Italiana",
+        "sector": "finanziario",
+        "weight": 7,
+        "currency": "EUR",
+        "purchase_price": 25.00,
+        "purchase_date": "2026-09-07",
+        "target_price": 30.00,
+        "stop_loss": 22.00,
+        "active": true
+      },
+      {
+        "ticker": "INTC",
+        "name": "Intel Corporation",
+        "exchange": "NASDAQ",
+        "sector": "tecnologico",
+        "weight": 5,
+        "currency": "USD",
+        "purchase_price": 35.00,
+        "purchase_date": "2026-09-07",
+        "target_price": 45.00,
+        "stop_loss": 30.00,
+        "active": true
+      }
+    ],
+    "watchlist": [
+      "GOOGL",
+      "AMZN",
+      "TSLA",
+      "NVDA",
+      "META",
+      "ENI.MI",
+      "GEN.MI",
+      "ISP.MI",
+      "STLA.MI"
+    ]
+  },
+  "scanning": {
+    "markets": ["europe", "usa"],
+    "sectors": [
+      "tecnologico",
+      "finanziario",
+      "utility",
+      "energetico",
+      "consumer"
+    ]
+  }
+}
