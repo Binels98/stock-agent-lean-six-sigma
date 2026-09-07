@@ -10,9 +10,9 @@
     "analyze": "node agents/analyze/analyzer.js",
     "report": "node agents/control/reporter.js",
     "monitor": "node agents/control/monitor.js",
-    "morning_report": "node scripts/send-morning-report.js",
-    "evening_report": "node scripts/send-evening-report.js",
-    "decision_report": "node scripts/send-decision-report.js"
+    "morning-report": "node scripts/send-morning-report.js",
+    "evening-report": "node scripts/send-evening-report.js",
+    "decision-report": "node scripts/send-decision-report.js"
   },
   "keywords": [
     "stock",
@@ -31,6 +31,7 @@
   "dependencies": {
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12",
+    "form-data": "^4.0.0",
     "luxon": "^3.4.4",
     "node-cron": "^3.0.2"
   },
