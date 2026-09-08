@@ -1,6 +1,7 @@
 const logger = require('../../lib/utils/logger');
 const configLoader = require('../../lib/common/config-loader');
 const dataStorage = require('../../lib/common/data-storage');
+const StockDataService = require('../../lib/services/stock-data-service');
 const { DateTime } = require('luxon');
 
 class Scanner {
@@ -10,6 +11,7 @@ class Scanner {
     this.settings = configLoader.getSettings();
     this.portfolioConfig = configLoader.getPortfolioConfig();
     this.timezone = configLoader.getTimezone();
+    this.stockDataService = StockDataService;
   }
 
   async initialize() {
@@ -52,24 +54,40 @@ class Scanner {
   }
 
   async scanStock(ticker) {
-    const priceChange = (Math.random() * 10 - 5).toFixed(2);
-    const volume = Math.floor(Math.random() * 10000000) + 1000000;
-    const newsSentiment = Math.random() * 2 - 1;
+    const stockData = await this.stockDataService.getStockData(ticker);
+    
+    if (!stockData) {
+      logger.warn('No data for ticker ' + ticker + ', using fallback mock data');
+      const priceChange = (Math.random() * 10 - 5).toFixed(2);
+      const volume = Math.floor(Math.random() * 10000000) + 1000000;
+      const newsSentiment = Math.random() * 2 - 1;
+
+      return {
+        ticker: ticker,
+        last_price: 100 + Math.random() * 200,
+        daily_change_percent: parseFloat(priceChange),
+        volume: volume,
+        news_sentiment: newsSentiment,
+        scanned_at: new Date().toISOString(),
+        data_source: 'MOCK'
+      };
+    }
 
     return {
-      ticker: ticker,
-      last_price: 100 + Math.random() * 200,
-      daily_change_percent: parseFloat(priceChange),
-      volume: volume,
-      news_sentiment: newsSentiment,
-      scanned_at: new Date().toISOString()
+      ticker: stockData.ticker,
+      last_price: stockData.last_price,
+      daily_change_percent: stockData.daily_change_percent || 0,
+      volume: stockData.volume,
+      news_sentiment: 0,
+      scanned_at: new Date().toISOString(),
+      data_source: stockData.data_source || 'FMP_API'
     };
   }
 
   isInteresting(stockData) {
-    return Math.abs(stockData.daily_change_percent) > 2 ||
-           Math.abs(stockData.news_sentiment) > 0.5 ||
-           stockData.volume > 5000000;
+    if (!stockData) return false;
+    
+    return this.stockDataService.isInteresting(stockData);
   }
 
   async saveScanResults(results) {
