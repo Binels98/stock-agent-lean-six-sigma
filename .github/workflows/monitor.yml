@@ -2,7 +2,6 @@ name: Monitor - Real-Time Market Monitoring
 
 on:
   schedule:
-    # Run every 5 minutes from 07:00 to 22:00 UTC (09:00-00:00 Rome time)
     - cron: '*/5 7-22 * * *'
   workflow_dispatch:
 
@@ -27,7 +26,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
-          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
 
       - name: Commit monitoring data
         run: |
