@@ -2,7 +2,7 @@ name: Collaborate - Multi-Agent Analysis
 
 on:
   schedule:
-    - cron: '30 7 * * *'  # 09:30 Rome time (UTC+2)
+    - cron: '30 7 * * *'
   workflow_dispatch:
 
 jobs:
@@ -26,7 +26,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
-          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
 
       - name: Run ARK Analyst
         run: node agents/collaborate/ark-analyst.js
